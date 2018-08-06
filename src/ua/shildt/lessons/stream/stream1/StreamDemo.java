@@ -57,5 +57,29 @@ public class StreamDemo {
         System.out.println();
 
         System.out.println("Original list: " + myList);
+
+        //reduce() 1 method
+        Optional<Integer> productObj = myList.stream().reduce((a, b) -> a * b);
+        if(productObj.isPresent()) System.out.println("method reduce 1 - " + productObj.get());
+
+        //reduce 2 method
+        int prodInt = myList.stream().reduce(1, (a, b) -> a * b);
+        System.out.println("method reduce 1 - " + prodInt);
+
+        int evenProd = myList.stream().reduce(1, (a,b) ->{
+            if (b % 2 == 0) return a * b;
+            else return a;
+        });
+        System.out.println("evenProd - " + evenProd );
+
+        //parallel
+        Optional<Integer> parallelObj = myList.parallelStream().reduce((a, b) -> a * b);
+        System.out.println("paralel 1 - " + parallelObj.get());
+
+        //parallel 2
+        int parallelObj2 = myList.parallelStream().reduce(1, (a, b) -> a * b, (a, b) -> a * b);
+        System.out.println("parallel 2 - " + parallelObj2);
+
+
     }
 }
